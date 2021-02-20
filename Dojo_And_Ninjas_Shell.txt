@@ -1,0 +1,123 @@
+
+(djangoPy3Environment) C:\Users\Brandon\Desktop\CodingDojo\repos\Python_stack\django\django_orm\Hansen_Brandon_DojoAndNinjas\dojo_ninjas_proj>python manage.py makemigrations
+Migrations for 'dojo_ninjas_app':
+  dojo_ninjas_app\migrations\0001_initial.py
+    - Create model Dojo
+    - Create model Ninja
+
+(djangoPy3Environment) C:\Users\Brandon\Desktop\CodingDojo\repos\Python_stack\django\django_orm\Hansen_Brandon_DojoAndNinjas\dojo_ninjas_proj>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, dojo_ninjas_app, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying dojo_ninjas_app.0001_initial... OK
+  Applying sessions.0001_initial... OK
+
+(djangoPy3Environment) C:\Users\Brandon\Desktop\CodingDojo\repos\Python_stack\django\django_orm\Hansen_Brandon_DojoAndNinjas\dojo_ninjas_proj>python manage.py shell
+Python 3.9.1 (tags/v3.9.1:1e5d33e, Dec  7 2020, 17:08:21) [MSC v.1927 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from dojo_ninjas_app.models import Dojo, Ninja
+>>> Dojo.objects.create(name="San Jose Campus", city="San Jose", state="CA")
+<Dojo: Dojo object (1)>
+>>> Dojo.objects.create(name="Chicago Campus", city="Chicago", state="IL")
+<Dojo: Dojo object (2)>
+>>> Dojo.objects.create(name="Dallas Campus", city="Dallas", state="TX")
+<Dojo: Dojo object (3)>
+>>> Dojo.objects.get(id=1).delete()
+(1, {'dojo_ninjas_app.Ninja': 0, 'dojo_ninjas_app.Dojo': 1})
+>>> Dojo.objects.get(id=2).delete()
+(1, {'dojo_ninjas_app.Ninja': 0, 'dojo_ninjas_app.Dojo': 1})
+>>> Dojo.objects.get(id=3).delete()
+(1, {'dojo_ninjas_app.Ninja': 0, 'dojo_ninjas_app.Dojo': 1})
+>>> Dojo.objects.all()
+<QuerySet []>
+>>> Dojo.objects.create(name="Arlington Campus", city="Arlington", state="VA")
+<Dojo: Dojo object (4)>
+>>> Dojo.objects.create(name="Bellevue Campus", city="Bellevue", state="WA")
+<Dojo: Dojo object (5)>
+>>> Dojo.objects.create(name="Tulsa Campus", city="Tulsa", state="OK")
+<Dojo: Dojo object (6)>
+>>> Ninja.objects.create(dojo=Dojo.objects.get(id=4), first_name="Bob", last_name="Jones")
+<Ninja: Ninja object (1)>
+>>> Ninja.objects.create(dojo=Dojo.objects.get(id=4), first_name="Amy", last_name="Rollings")
+<Ninja: Ninja object (2)>
+>>> Ninja.objects.create(dojo=Dojo.objects.get(id=4), first_name="Jane", last_name="Doe")
+<Ninja: Ninja object (3)>
+>>> Ninja.objects.create(dojo=Dojo.objects.get(id=5), first_name="John", last_name="Smith")
+<Ninja: Ninja object (4)>
+>>> Ninja.objects.create(dojo=Dojo.objects.get(id=5), first_name="Ryan", last_name="Richards")
+<Ninja: Ninja object (5)>
+>>> Ninja.objects.create(dojo=Dojo.objects.get(id=5), first_name="Van", last_name="Michaels")
+<Ninja: Ninja object (6)>
+>>> Ninja.objects.create(dojo=Dojo.objects.get(id=6), first_name="Jason", last_name="Florom")
+<Ninja: Ninja object (7)>
+>>> Ninja.objects.create(dojo=Dojo.objects.get(id=6), first_name="Dustin", last_name="Saye")
+<Ninja: Ninja object (8)>
+>>> Ninja.objects.create(dojo=Dojo.objects.get(id=6), first_name="Chris", last_name="Silhan")
+<Ninja: Ninja object (9)>
+>>> ninjas = Ninja.objects.filter(dojo=Dojo.objects.get(id=4))
+>>> ninjas
+<QuerySet [<Ninja: Ninja object (1)>, <Ninja: Ninja object (2)>, <Ninja: Ninja object (3)>]>
+>>> ninjas = Ninja.objects.filter(dojo=Dojo.objects.get(id=6))
+>>> ninjas
+<QuerySet [<Ninja: Ninja object (7)>, <Ninja: Ninja object (8)>, <Ninja: Ninja object (9)>]>
+>>> last_ninja = Ninja.objects.get(id=9)
+>>> last_ninja.dojo.name
+'Tulsa Campus'
+>>> ^Z
+
+now exiting InteractiveConsole...
+
+(djangoPy3Environment) C:\Users\Brandon\Desktop\CodingDojo\repos\Python_stack\django\django_orm\Hansen_Brandon_DojoAndNinjas\dojo_ninjas_proj>python manage.py makemigrations
+You are trying to add a non-nullable field 'desc' to dojo without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 1
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type 'exit' to exit this prompt
+>>> "old dojo"
+Migrations for 'dojo_ninjas_app':
+  dojo_ninjas_app\migrations\0002_dojo_desc.py
+    - Add field desc to dojo
+
+(djangoPy3Environment) C:\Users\Brandon\Desktop\CodingDojo\repos\Python_stack\django\django_orm\Hansen_Brandon_DojoAndNinjas\dojo_ninjas_proj>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, dojo_ninjas_app, sessions
+Running migrations:
+  Applying dojo_ninjas_app.0002_dojo_desc... OK
+
+(djangoPy3Environment) C:\Users\Brandon\Desktop\CodingDojo\repos\Python_stack\django\django_orm\Hansen_Brandon_DojoAndNinjas\dojo_ninjas_proj>python manage.py shell
+Python 3.9.1 (tags/v3.9.1:1e5d33e, Dec  7 2020, 17:08:21) [MSC v.1927 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from dojo_ninjas_app.models import Dojo, Ninja
+>>> Dojo.objects.create(name = "Burbank Campus", city = "Burbank", state = "CA" desc="Burbank Stacks are: Python, MERN, and JAVA")
+  File "<console>", line 1
+    Dojo.objects.create(name = "Burbank Campus", city = "Burbank", state = "CA" desc="Burbank Stacks are: Python, MERN, and JAVA")
+                                                                                ^
+SyntaxError: invalid syntax
+>>> Dojo.objects.create(name = "Burbank Campus", city = "Burbank", state = "CA", desc="Burbank Stacks are: Python, MERN, and JAVA")
+<Dojo: Dojo object (7)>
+>>> ^Z
+
+now exiting InteractiveConsole...
+
+(djangoPy3Environment) C:\Users\Brandon\Desktop\CodingDojo\repos\Python_stack\django\django_orm\Hansen_Brandon_DojoAndNinjas\dojo_ninjas_proj>
