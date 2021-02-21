@@ -97,12 +97,21 @@
     align-items: flex-end;
 }
 
+.delete_record{
+    width: 100%;
+    display: flex;
+}
+
+.delete_form{
+    margin-right: 10px;
+}
+
 .dojo_display_name{
     width: 100%;
 }
 
 .dojo_list_items .ninja_list{
-    width: 80%;
+    width: 75%;
     list-style-type: disc;
     display: flex;
     flex-direction: column;

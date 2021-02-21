@@ -75,7 +75,13 @@
                 <ul class="dojo_list">
                     {% for dojo in dojos %}
                         <li class="dojo_list_items">
-                            <p class="dojo_display_name">Ninjas at the {{dojo.name}}</p> 
+                            <div class="delete_record">
+                                <form action="/delete_dojo/{{dojo.id}}" class="delete_form" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" name="delete_dojo_btn">X</button>
+                                </form>
+                                <p class="dojo_display_name">Ninjas at the {{dojo.name}}</p> 
+                            </div>
                             <ul class="ninja_list">
                                 {% for ninja in dojo.ninjas.all %}
                                     <li class="ninjas_list_items">

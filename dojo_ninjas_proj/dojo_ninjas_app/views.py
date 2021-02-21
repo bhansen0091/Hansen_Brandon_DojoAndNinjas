@@ -17,6 +17,13 @@ def create_dojo(request):
     )
     return redirect("/")
 
+def delete_dojo(request, dojo_id):
+    print(Ninja.objects.filter(dojo=Dojo.objects.get(id=dojo_id)))
+    Ninja.objects.filter(dojo=Dojo.objects.get(id=dojo_id)).delete()
+    print(Ninja.objects.filter(dojo=Dojo.objects.get(id=dojo_id)))
+    Dojo.objects.get(id=dojo_id).delete()
+    return redirect("/")
+
 def create_ninja(request):
     Ninja.objects.create(
         dojo = Dojo.objects.get(id = request.POST['dojo_select']),
